@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "dist",
+      "target": "es6",
+      "declaration": true,
+      "removeComments": true,
+      "sourceMap": true
+    },
+    "lib": ["es2015"]
+  }
