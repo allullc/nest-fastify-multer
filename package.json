@@ -1,8 +1,9 @@
 {
   "name": "nest-fastify-multer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The objective of this module is to provide a package with filters already prepared to work with 'fastify-multer'.",
   "main": "dist/index.js",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc"
   },
@@ -22,5 +23,9 @@
     "file",
     "multipart",
     "multipart/form-data"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allullc/nest-fastify-multer.git"
+  }
 }
