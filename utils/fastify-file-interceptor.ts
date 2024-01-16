@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import FastifyMulter from 'fastify-multer';
-import { Options, Multer } from 'multer';
+import { Options } from 'fastify-multer/lib/interfaces';
 
 type MulterInstance = any;
 function FastifyFile(
@@ -23,9 +23,9 @@ function FastifyFile(
     constructor(
       @Optional()
       @Inject('MULTER_MODULE_OPTIONS')
-      options: Multer,
+      options: typeof FastifyMulter,
     ) {
-      this.multer = (FastifyMulter as any)({ ...options, ...localOptions });
+      this.multer = (FastifyMulter)({ ...options, ...localOptions });
     }
 
     async intercept(
@@ -40,7 +40,6 @@ function FastifyFile(
           ctx.getResponse(),
           (error: any) => {
             if (error) {
-              // const error = transformException(err);
               return reject(error);
             }
             resolve();
@@ -55,5 +54,5 @@ function FastifyFile(
   return Interceptor as Type<NestInterceptor>;
 }
 
-export const FastifyFileInterceptor = (fieldName: string, localOptions: Options,) =>
+export const FastifyFileInterceptor = (fieldName: string, localOptions: Options) =>
   UseInterceptors(FastifyFile(fieldName, localOptions));

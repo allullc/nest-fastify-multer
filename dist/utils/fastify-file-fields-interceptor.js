@@ -27,12 +27,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FastifyFileFieldsInterceptor = void 0;
 const common_1 = require("@nestjs/common");
 const fastify_multer_1 = __importDefault(require("fastify-multer"));
-const multer_1 = require("multer");
 function FastifyFileFields(uploadFields, localOptions) {
-    var _a;
     let MixinInterceptor = class MixinInterceptor {
         constructor(options) {
-            this.multer = fastify_multer_1.default(Object.assign(Object.assign({}, options), localOptions));
+            this.multer = (fastify_multer_1.default)(Object.assign(Object.assign({}, options), localOptions));
         }
         intercept(context, next) {
             return __awaiter(this, void 0, void 0, function* () {
@@ -50,7 +48,7 @@ function FastifyFileFields(uploadFields, localOptions) {
     MixinInterceptor = __decorate([
         __param(0, (0, common_1.Optional)()),
         __param(0, (0, common_1.Inject)('MULTER_MODULE_OPTIONS')),
-        __metadata("design:paramtypes", [typeof (_a = typeof multer_1.Multer !== "undefined" && multer_1.Multer) === "function" ? _a : Object])
+        __metadata("design:paramtypes", [Object])
     ], MixinInterceptor);
     const Interceptor = (0, common_1.mixin)(MixinInterceptor);
     return Interceptor;

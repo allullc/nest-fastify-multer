@@ -1,5 +1,5 @@
 {
-  "name": "nest-fastify-multer",
+  "name": "@allullc/nest-fastify-multer",
   "version": "1.0.1",
   "description": "The objective of this module is to provide a package with filters already prepared to work with 'fastify-multer'.",
   "main": "dist/index.js",
@@ -10,9 +10,9 @@
   "author": "Luis Angel Llull Céspedes",
   "license": "ISC",
   "dependencies": {
-    "@nestjs/common": "^8.0.11",
-    "fastify-multer": "^2.0.2",
-    "multer": "^1.4.3"
+    "@nestjs/common": "^10.3.0",
+    "fastify-multer": "^2.0.3",
+    "rxjs": "^7.8.1"
   },
   "keywords": [
     "fastify",
@@ -27,5 +27,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/allullc/nest-fastify-multer.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

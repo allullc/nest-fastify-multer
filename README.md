@@ -25,7 +25,7 @@ import { contentParser } from 'fastify-multer';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter()
   );
   await app.register(contentParser);
   await app.listen(3000);
@@ -41,8 +41,8 @@ import {
   Body,
   Controller,
   Post,
-  Req,
-  UploadedFiles
+  Req, 
+  UploadedFile,
 } from '@nestjs/common';
 
 // import the filters to use from the module.
@@ -62,21 +62,20 @@ export class ImageController {
   // use this interceptor to specify one file
   @FastifyFileInterceptor(
   // fileName
-    'avatar'
+    'avatar',
   // here you can add any multer configuration.
    {
       storage: diskStorage({
         destination: './upload/single', // path where the file will be downloaded
         filename: editFileName, // here you can put your own function to edit multer file name when saving to local disk
-      }
+      }),
       fileFilter: imageFileFilter, // here you can put your own function to filter the received files
     }
-  ),
+  )
   uploadFile(
     @Req() req: Request,
     // use this param decorator to capture the file. The file type Express.Multer.File is used as this is used.
     @UploadedFiles() file: Express.Multer.File,
-    @Body() body: ,
   ) {
     return file;
   }
@@ -87,21 +86,20 @@ export class ImageController {
   // fileName
     'avatar',
   // maxCount  
-     1
+     1,
   // here you can add any multer configuration.
    {
       storage: diskStorage({
         destination: './upload/single', // path where the file will be downloaded
         filename: editFileName, // here you can put your own function to edit multer file name when saving to local disk
-      }
+      }),
       fileFilter: imageFileFilter, // here you can put your own function to filter the received files
     }
-  ),
+  )
   uploadFiles(
     @Req() req: Request,
     // use this param decorator to capture the files. The file type Express.Multer.File is used as this is used.
-    @UploadedFiles() files: Express.Multer.File[],
-    @Body() body: ,
+    @UploadedFile() files: Express.Multer.File[],
   ) {
     return files;
   }
@@ -110,21 +108,20 @@ export class ImageController {
   // use this interceptor to specify more than one field containing files
   @FastifyFileFieldsInterceptor(
   // specify here the array of field name and maximum number of files allowed in this field.  
-    [{ name: 'avatar', maxCount: 1 }, { name: 'background' maxCount: 1 }],
+    [{ name: 'avatar', maxCount: 1 }, { name: 'background', maxCount: 1 }],
   // here you can add any multer configuration.
    {
       storage: diskStorage({
         destination: './upload/single', // path where the file will be downloaded
         filename: editFileName, // here you can put your own function to edit multer file name when saving to local disk
-      }
+      }),
       fileFilter: imageFileFilter, // here you can put your own function to filter the received files
     }
-  ),
+  )
   uploadFileFields(
     @Req() req: Request,
     // use this param decorator to capture the files. The file type Express.Multer.File is used as this is used.
-    @UploadedFiles() files: { avatar?: Express.Multer.File[], background?: Express.Multer.File[] },
-    @Body() body: ,
+    @UploadedFile() files: { avatar?: Express.Multer.File[], background?: Express.Multer.File[] },
   ) {
     return files;
   }
